@@ -99,10 +99,20 @@ function getFullName(personObj) {
 // Return the largest number in a two dimensional array
 function maxTwoDimArray(matrix) {
   let counter = 0;
-  matrix.map(function(num){
-    num.map(function(miniNum){
+  let array = [...matrix.flat()];
+    array.map(function(miniNum){
       if (miniNum > counter) {counter = miniNum}
-    })
-  })
+    }) 
   return counter
 }
+
+
+// function maxTwoDimArray(matrix) {
+//   let counter = 0;
+//   matrix.map(function(num){
+//     num.map(function(miniNum){
+//       if (miniNum > counter) {counter = miniNum}
+//     })
+//   })
+//   return counter
+// }
