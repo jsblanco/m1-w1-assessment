@@ -1,6 +1,8 @@
 // Write a function that returns the product of 2 numbers
 function product(x, y) {
-  let result = x * y;
+  let result = false
+  if (typeof(x)  === "number" && typeof(y) === "number")
+  {result = x * y;}
   return result;
 }
 
@@ -24,7 +26,10 @@ function maxOfTwoNumbers(a, b) {
 
 // Return the largest of 3 numbers
 function maxOfThreeNumbers(a, b, c) {
-  if (a > b && a > c) {
+
+  if (typeof(a)  != "number" || typeof(b)!= "number" || typeof(c)!= "number") {
+    return false
+  } else if (a > b && a > c) {
     return a;
   } else if (b > 1 && b > c) {
     return b;
@@ -35,17 +40,30 @@ function maxOfThreeNumbers(a, b, c) {
 
 // Calculate the sum of an array of numbers
 function sumArray(numbers) {
+  if (Array.isArray(numbers) === false) {return false }
+  if (numbers[0] === undefined){return 0};
+
   let sum = 0;
-  numbers.map(function(num) {
-    sum = sum + num;
-  });
-  return sum;
+
+  for (let i=0; i<numbers.length; i++){
+    if (typeof(numbers[i]) != "number") {
+      return false}
+  }
+
+  sum = (numbers.reduce(function(a, b){
+      return a+b }
+))
+
+
+return sum;
 }
+
 
 // Return the largest number of a non-empty array
 function maxOfArray(numbers) {
+  if (Array.isArray(numbers)===false) {return false}
   if (numbers.length === 0) {
-    return 0;
+    return false;
   }
   let maxNumber = 0;
   numbers.map(function(num) {
@@ -58,9 +76,10 @@ function maxOfArray(numbers) {
 
 // Return the longest string in an array
 function longestString(strings) {
+  if (Array.isArray(strings)===false || strings.length === 0){return false}
   let maxString = "";
-  strings.map(function(string){
-    if (string.length > maxString.length){
+  strings.map(function(string){if (!string){
+  } else if (string.length > maxString.length){
       maxString = string;
     }
   }
@@ -70,6 +89,7 @@ function longestString(strings) {
 
 // Return whether a word is in an array
 function doesWordExist(wordsArr, word) {
+  if (Array.isArray(wordsArr)===false){return false}
   let indexWord = false
   if (wordsArr.indexOf(word) != -1){indexWord = true}
   return indexWord;
@@ -78,7 +98,8 @@ function doesWordExist(wordsArr, word) {
 // Finding the first non-duplicate (non-repeating) word in an array
 
 function findUnique(wordsArr) {
-  if (wordsArr.length === 0){return false}
+
+  if (Array.isArray(wordsArr)===false || wordsArr.length === 0){return false}
   let finalAnswer=  ""
   wordsArr.find(function(num){
     if (wordsArr.indexOf(num) === wordsArr.lastIndexOf(num)){
@@ -86,18 +107,22 @@ function findUnique(wordsArr) {
       return finalAnswer;
     }
   })
+
   return finalAnswer
 }
   
 
 // Get the fullName from the object { firstName: 'Tony', lastName: 'Stark'}
 function getFullName(personObj) {
+  if (typeof(personObj) != "object"){return false}
+  if ((!personObj.firstName) || (!personObj.lastName)) {return false}
   return (personObj.firstName+" "+personObj.lastName)
 
 }
 
 // Return the largest number in a two dimensional array
 function maxTwoDimArray(matrix) {
+  if (Array.isArray(matrix)===false|| matrix.length === 0) {return false}
   let counter = 0;
   let array = [...matrix.flat()];
     array.map(function(miniNum){
@@ -106,13 +131,3 @@ function maxTwoDimArray(matrix) {
   return counter
 }
 
-
-// function maxTwoDimArray(matrix) {
-//   let counter = 0;
-//   matrix.map(function(num){
-//     num.map(function(miniNum){
-//       if (miniNum > counter) {counter = miniNum}
-//     })
-//   })
-//   return counter
-// }
